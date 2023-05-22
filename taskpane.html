@@ -35,91 +35,450 @@
 <!-- <body class="ms-font-m ms-welcome ms-Fabric"> -->
 
 <body class="bg-[#F7F7F7]">
-    <div id="loginScr">
-        <div class="flex justify-between items-center mr-4">
-            <!-- <h3 class="font-bold mt-2 ml-2">excel<span class="text-green-400 italic">f</span>ormulabot</h3> -->
-            <img src="https://e1b5c549a6dd5273e224cd87b24dd3fb.cdn.bubble.io/f1683063568966x548239851118152300/Copy%20of%20Full%20logo%20with%20transparent%20background%20%28200%20%C3%97%2040%20px%29.svg"
-                width="180px" class="ml-2" />
+    <header class="bg-light mb-4">
+        <div class="container-fluid">
+          <div class="row">
+            <div class="col">
+              <img src="https://d1muf25xaso8hp.cloudfront.net/https%3A%2F%2Fe1b5c549a6dd5273e224cd87b24dd3fb.cdn.bubble.io%2Ff1683076870037x820209632778554600%2FTransparent%2520Black.png?w=256&h=51&auto=compress&dpr=1&fit=max" alt="Logo" class="mt-1 w-75">
+            </div>
+            <div class="col-auto d-flex align-items-center">
+              <button class="btn btn-light" id="logout">
+                <i class="fas fa-power-off"></i>
+              </button>
+            </div>
+          </div>
         </div>
-        <label class="mt-3 ml-4">Email:</label>
-        <div class="mt-1" style="text-align: -webkit-center">
-            <input placeholder="Email" id="email" class="form-control w-[90%]" />
+        <div class="container d-flex justify-content-between align-items-center py-2">
+          <button class="btn btn-light btn-lg px-2" id="back-button" style="display: none;">
+            <i class="fas fa-arrow-left"></i>
+          </button>
+          <h2 class="text-center m-0 w-100" id="header-label">I want to...</h2>
+          <div></div>
         </div>
-        <label class="mt-3 ml-4">Password:</label>
-        <div class="mt-1" style="text-align: -webkit-center">
-            <input type="password" placeholder="Password" id="password" class="form-control w-[90%]" />
-        </div>
-        <div class="mt-3" style="text-align: -webkit-center">
-            <button
-                class="btn btn-secondary bg-[#0C4D78] hover:bg-[#063c61] active:bg-[#063c61] focus:bg-[#063c61] w-[90%]"
-                id="login">Login</button>
-        </div>
-        <div id="LoginErrorMessage" class="mt-3 p-1" style="text-align:center;display: none;">
-            <p style="color:red;">Request failed, try again. If issue persists, contact hello@excelformulabot.com.</p>
-        </div>
-        <div class="mt-3 p-1" style="text-align:center;">
-            <a href="https://excelformulabot.com/">Sign up for free!</a>
-        </div>
-        <div class="mt-1 p-1" style="text-align:center">
-            <a href="https://excelformulabot.com/frequently-asked-questions-faq">Have any questions?</a>
-        </div>
-        <div class="mt-1 p-1" style="text-align:center">
-            <a href="mailto:hello@excelformulabot.com">Experiencing issues? Contact hello@excelformulabot.com</a>
-        </div>
+    </header>
+
+    <div id="loadScr" class="bg-gray-300 fixed top-0 left-0 w-full h-full" style="display:none;">
+      <div class="loadHolder mt-[12rem] ml-[5.5rem]">
+        <div class="loader"></div>
+      </div>
     </div>
-    <div id="mainScr" class="hidden">
-        <div class="flex justify-between items-center mr-4">
-            <!-- <h3 class="font-bold mt-2 ml-2">excel<span class="text-green-400 italic">f</span>ormulabot</h3> -->
-            <img src="https://e1b5c549a6dd5273e224cd87b24dd3fb.cdn.bubble.io/f1683063568966x548239851118152300/Copy%20of%20Full%20logo%20with%20transparent%20background%20%28200%20%C3%97%2040%20px%29.svg"
-                width="180px" class="ml-2" />
-            <!-- <i class="fa-sharp fa-solid fa-power-off cursor-pointer" onclick="logout()" title="logout"></i> -->
+
+    <div class="container" id="loginScr" style="display:none;">
+      <label class="mt-3 ml-4">Email:</label>
+      <div class="mt-1" style="text-align: -webkit-center">
+        <input placeholder="Email" id="email" class="form-control w-[90%]" />
+      </div>
+      <label class="mt-3 ml-4">Password:</label>
+      <div class="mt-1" style="text-align: -webkit-center">
+        <input type="password" placeholder="Password" id="password" class="form-control w-[90%]" />
+      </div>
+      <div class="mt-3" style="text-align: -webkit-center">
+        <button class="btn btn-secondary bg-[#0C4D78] hover:bg-[#063c61] active:bg-[#063c61] focus:bg-[#063c61] w-[90%]" id="login">Login</button>
+        <div class="text-left ml-4">
+          <a href="http://www.formulabot.com/?utm_source=googlesheets&utm_medium=addon" target="blank">Sign up for free!</a>
         </div>
-        <div class="!mt-3" style="text-align: -webkit-center">
-            <select class="form-select w-[90%]" id="selectField">
-                <option value="1">Generate Formula</option>
-                <option value="2">Explain Formula</option>
-            </select>
+      </div>
+      <div class="text-center position-absolute bottom-2">
+        <p>Experiencing issues? Contact <a href="mailto:hello@formulabot.com">hello@formulabot.com</a></p>
+      </div>
+    </div>
+
+    <main>
+      <div class="container-fluid h-100" id="mainScr" style="display:none;">
+        <div class="row h-100">
+          <!--<div class="col h-100 d-flex align-items-center justify-content-center">-->
+            <div class="btn-section-content d-none" id="generate-formula-section">
+              <!-- Content for Generate Formula section -->
+              <div class="container">
+                <div class="row">
+                    <div class="col-12">
+                        <textarea type="text" class="form-control form-control-lg" id="txtGenerateInput" rows="3" placeholder="Input your text instructions here to generate a formula"></textarea>
+                    </div>
+                </div>
+                <div class="row py-3">
+                    <div class="col-12">
+                        <button type="button" class="btn btn-secondary btn-lg w-100" id="btnSubmitGenerate">Submit</button>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-12">
+                        <textarea type="text" class="form-control form-control-lg mb-3 mb-md-0" id="txtGenerateOutput" rows="3" placeholder="Formula will show here"></textarea>
+                    </div>
+                </div>
+                <div class="row mt-3">
+                    <div class="col-5">
+                        <button type="button" class="btn btn-primary w-100" id="btnCopyGenerate">Copy</button>
+                    </div><div class="col-7">
+                        <button type="button" class="btn btn-success w-100" id="btnInsertGenerate">Insert in cell</button>
+                    </div>
+                </div>
+              </div>
+            </div>
+            <div class="btn-section-content d-none" id="explain-formula-section">
+              <!-- Content for Explain Formula section -->
+              <div class="container">
+                <div class="row">
+                    <div class="col-12">
+                        <textarea type="text" class="form-control form-control-lg" id="txtExplainInput" rows="3" placeholder="Input your formula here to have it explained"></textarea>
+                    </div>
+                </div>
+                <div class="row py-3">
+                    <div class="col-12">
+                        <button type="button" class="btn btn-secondary btn-lg w-100" id="btnSubmitExplain">Submit</button>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-12">
+                        <textarea type="text" class="form-control form-control-lg mb-3 mb-md-0" id="txtExplainOutput" rows="3" placeholder="Explanation will show here"></textarea>
+                    </div>
+                </div>
+                <div class="row mt-3">
+                    <div class="col-5">
+                        <button type="button" class="btn btn-primary w-100" id="btnCopyExplain">Copy</button>
+                    </div><div class="col-7">
+                        <button type="button" class="btn btn-success w-100" id="btnInsertExplain">Insert in cell</button>
+                    </div>
+                </div>
+              </div>
+            </div>
+            <div class="btn-section-content d-none" id="classify-section">
+              <!-- Content for Classify section -->
+              <div class="container">
+                <div class="row">
+                    <div class="col-12">
+                        <div class="text-center fs-5">Classify</div>
+                    </div>
+                </div>
+                <div class="row">
+                  <div class="col-12">
+                    <div class="input-group input-group-append">
+                      <input type="text" class="form-control form-control-lg bg-warning bg-gradient border-0" id="txtClassifyRange" placeholder="B2">
+                      <button type="button" class="btn btn-light get-active-range">
+                        <i class="fa-sharp fa-solid fa-table-cells-large"></i>
+                      </button>
+                    </div>
+                  </div>
+                </div>
+                <div class="row text-center mt-4 py-1">
+                    <div class="col-12">
+                        <div class="text-center fs-5">into one of the following groups</div>
+                    </div>
+                </div>
+                <div id="txtClassifyCategories">
+                  <div class="row py-1">
+                    <div class="col-sm-12 col-md">
+                      <div class="input-group input-group-append">
+                        <input type="text" class="form-control form-control-lg bg-category bg-gradient border-0" placeholder="Fruit" value="Fruit">
+                        <button type="button" class="btn btn-light delete-field">
+                          <i class="fas fa-trash"></i>
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row py-1">
+                    <div class="col-sm-12 col-md">
+                      <div class="input-group input-group-append">
+                        <input type="text" class="form-control form-control-lg bg-category bg-gradient border-0" placeholder="Vegetable" value="Vegetable">
+                        <button type="button" class="btn btn-light delete-field">
+                          <i class="fas fa-trash"></i>
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row py-1">
+                      <div class="col-12">
+                          <a class="text-center text-decoration-none fs-5" href="#" id="add-field">(+) Add</a>
+                      </div>
+                  </div>
+                </div>
+                <div class="row mt-4">
+                    <div class="col-12">
+                        <button type="button" class="btn btn-success btn-lg w-100" id="btnInsertClassify">Insert in cell</button>
+                    </div>
+                </div>
+              </div>
+            </div>
+            <div class="btn-section-content d-none" id="extract-section">
+              <!-- Content for Extract section -->
+              <div class="container">
+                <div class="row">
+                    <div class="col-12">
+                        <div class="text-center fs-5">Extract the</div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-12">
+                        <input type="text" class="form-control form-control-lg bg-category bg-gradient border-0 cell-range" id="txtExtractDescription" placeholder="third word">
+                    </div>
+                </div>
+                <div class="row text-center mt-4 py-1">
+                    <div class="col-12">
+                        <div class="text-center fs-5">from</div>
+                    </div>
+                </div>
+                <div class="row">
+                  <div class="col-12">
+                    <div class="input-group input-group-append">
+                      <input type="text" class="form-control form-control-lg bg-warning bg-gradient border-0" id="txtExtractRange" placeholder="B2">
+                      <button type="button" class="btn btn-light get-active-range">
+                        <i class="fa-sharp fa-solid fa-table-cells-large"></i>
+                      </button>
+                    </div>
+                  </div>
+                </div>
+                <div class="row mt-4">
+                    <div class="col-12">
+                        <button type="button" class="btn btn-success btn-lg w-100" id="btnInsertExtract">Insert in cell</button>
+                    </div>
+                </div>
+              </div>
+            </div>
+            <div class="btn-section-content d-none" id="analyze-sentiment-section">
+              <!-- Content for Analyze Sentiment section -->
+              <div class="container">
+                  <div class="row">
+                      <div class="col-12">
+                          <div class="text-center fs-5">Analyze sentiment of</div>
+                      </div>
+                  </div>
+                  <div class="row">
+                      <div class="col-12">
+                        <div class="input-group input-group-append">
+                          <input type="text" class="form-control form-control-lg bg-warning bg-gradient border-0" id="txtSentimentRange" placeholder="B2">
+                          <button type="button" class="btn btn-light get-active-range">
+                            <i class="fa-sharp fa-solid fa-table-cells-large"></i>
+                          </button>
+                        </div>
+                      </div>
+                  </div>
+                  <div class="row text-center mt-4 py-1">
+                      <div class="col-12">
+                          <div class="text-center fs-5">as one of the following</div>
+                      </div>
+                  </div>
+                  <div id="txtSentimentCategories">
+                    <div class="row py-1">
+                      <div class="col-sm-12 col-md">
+                        <div class="input-group input-group-append">
+                          <input type="text" class="form-control form-control-lg bg-category bg-gradient border-0" placeholder="Positive" value="Positive">
+                          <button type="button" class="btn btn-light delete-field">
+                            <i class="fas fa-trash"></i>
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="row py-1">
+                      <div class="col-sm-12 col-md">
+                        <div class="input-group input-group-append">
+                          <input type="text" class="form-control form-control-lg bg-category bg-gradient border-0" placeholder="Negative" value="Negative">
+                          <button type="button" class="btn btn-light delete-field">
+                            <i class="fas fa-trash"></i>
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="row py-1">
+                      <div class="col-sm-12 col-md">
+                        <div class="input-group input-group-append">
+                          <input type="text" class="form-control form-control-lg bg-category bg-gradient border-0" placeholder="Neutral" value="Neutral">
+                          <button type="button" class="btn btn-light delete-field">
+                            <i class="fas fa-trash"></i>
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="row py-1">
+                      <div class="col-12">
+                          <a class="text-center text-decoration-none fs-5" href="#" id="add-field">(+) Add</a>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row mt-4">
+                      <div class="col-12">
+                          <button type="button" class="btn btn-success btn-lg w-100" id="btnInsertSentiment">Insert in cell</button>
+                      </div>
+                  </div>
+              </div>
+            </div>
+            <div class="btn-section-content d-none" id="retrieve-info-section">
+              <!-- Content for Retrieve Information section -->
+              <div class="container">
+                <div class="row">
+                    <div class="col-12">
+                        <div class="text-center fs-5">Give me the</div>
+                    </div>
+                </div>
+                <div class="row">
+                  <div class="col-12">
+                      <input type="text" class="form-control form-control-lg bg-category bg-gradient border-0" id="txtRetrieveDescription" placeholder="Population">
+                  </div>
+                </div>
+                <div class="row text-center mt-4 py-1">
+                    <div class="col-12">
+                        <div class="text-center fs-5">of</div>
+                    </div>
+                </div>
+                <div class="row">
+                  <div class="col-12">
+                    <div class="input-group input-group-append">
+                      <input type="text" class="form-control form-control-lg bg-warning bg-gradient border-0" id="txtRetrieveRange" placeholder="C10">
+                      <button type="button" class="btn btn-light get-active-range">
+                        <i class="fa-sharp fa-solid fa-table-cells-large"></i>
+                      </button>
+                    </div>
+                  </div>
+                </div>
+                <div class="row mt-4">
+                    <div class="col-12">
+                        <button type="button" class="btn btn-success btn-lg w-100" id="btnInsertRetrieve">Insert in cell</button>
+                        <!--<small class="text-danger fs-5">Error</small>-->
+                    </div>
+                </div>
+              </div>
+            </div>
+            <div class="btn-section-content d-none" id="freeform-section">
+              <!-- Content for Freeform section -->
+              <div class="container">
+                <div class="row">
+                  <div class="col-12">
+                    <div>The <span class="fw-bolder">=FORMULABOT_FREEFORM</span> formula lets you type in anything, allowing you to fully customize the response.<br><br>Make sure to be as specific as possible. If you do not get the desired results, try again.
+</div>
+                  </div>
+                </div>
+                <div class="row mt-3">
+                  <div class="col-12">
+                    <div class="fw-bolder">Examples:</div>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-12">
+                    <div>=FORMULABOT_FREEFORM(
+                      <span class="text-green">“Write me a thank you note to ”,</span>
+                      <span class="text-orange">B10</span>
+                      <span class="text-green">,“for gifting me a”,</span>
+                      <span class="text-orange">C10</span>)
+                    </div>
+                  </div>
+                </div>
+                <div class="row mt-2">
+                  <div class="col-12">
+                    <div>=FORMULABOT_FREEFORM(
+                      <span class="text-green">“Write me an article about SEO”</span>
+                      )
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="btn-section-content d-none" id="infer-section">
+              <!-- Content for Infer section -->
+              <div class="container">
+                <div class="row">
+                  <div class="col-12">
+                    <div>The <span class="fw-bolder">=FORMULABOT_INFER</span> formula allows you to insert examples of inputs and outputs to infer additional inputs in which you don't have an output.
+</div>
+                  </div>
+                </div>
+                <div class="row mt-3">
+                  <div class="col-12">
+                    <div class="fw-bolder">Examples:</div>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-12">
+                    <img src="https://e1b5c549a6dd5273e224cd87b24dd3fb.cdn.bubble.io/f1683555077821x914146478826124900/infer.png" alt="Logo" class="mt-1 img-fluid">
+                  </div>
+                </div>
+              </div>
+            </div>
+          <!--</div>-->
         </div>
-        <div class="mt-2" style="text-align: -webkit-center">
-            <textarea class="form-control w-[90%] resize-none" id="input" rows="5"
-                placeholder="Input Your Question/Formula"></textarea>
+      </div>
+    
+      <!-- Buttons to show sections -->
+      <div class="container" id="home-section">
+        <div class="row py-1">
+          <div class="col">
+            <button type="button" class="btn btn-section btn-lg w-100" id="generate-formula-button">
+              <div class="fw-bold section-label">Generate Formula</div>
+              <div class="text-muted section-sublabel">Generate a formula based on text instructions</div>
+            </button>
+          </div>
         </div>
-        <div class="mt-2" style="text-align: -webkit-center">
-            <button class="btn btn-success w-[90%]" id="submit">Submit</button>
-        </div>
-        <div class="mt-2" style="text-align: -webkit-center">
-            <textarea class="form-control w-[90%] resize-none" id="output" rows="5" placeholder="Output"
-                disabled></textarea>
-        </div>
-        <div class="mt-2" style="text-align: -webkit-center">
-            <button
-                class="btn btn-secondary bg-[#0C4D78] hover:bg-[#063c61] active:bg-[#063c61] focus:bg-[#063c61] w-[90%]"
-                id="copy">Copy</button>
-        </div>
-        <div class="mt-2" style="text-align: -webkit-center">
-            <button class="btn btn-secondary w-[90%]" id="insert">Insert in Current Cell</button>
-        </div>
-        <div class="mt-2" style="text-align: -webkit-center">
-            <!-- <button onclick="logout()" class="btn btn-danger w-[90%]">Logout</button> -->
-            <span onclick="logout()" id="LogoutBtn">Logout</span>
+        <div class="row py-1">
+          <div class="col">
+            <button type="button" class="btn btn-section btn-lg w-100" id="explain-formula-button">
+              <div class="fw-bold section-label">Explain Formula</div>
+              <div class="text-muted section-sublabel">Input a formula to have it explained for you</div>
+            </button>
+          </div>
         </div>
 
-        <div class="mt-2" style="text-align: -webkit-center">
-            <!-- <p>For technical issues, contact <a href="mailto:hello@excelformulabot.com">hello@excelformulabot.com</a></p> -->
-            <p>For technical issues, log out (above) and log back in. If issue persists, contact
-                hello@excelformulabot.com</p>
+        <!-- ADVANCED FEATURES -->
+        <fieldset class="border rounded-3 my-2 px-2 pt-0 pb-2">
+          <legend class="float-none w-auto px-3">Advanced Features</legend>
+          <div class="row py-1">
+            <div class="col">
+                <button type="button" class="btn btn-section-advanced btn-lg w-100" id="classify-button">
+                    <div class="fw-bold section-label">Classify</div>
+                    <div class="text-muted section-sublabel">Classify information into multiple categories</div>
+                </button>
+            </div>
+          </div>
+          <div class="row py-1">
+              <div class="col">
+                  <button type="button" class="btn btn-section-advanced btn-lg w-100" id="extract-button">
+                      <div class="fw-bold section-label">Extract</div>
+                      <div class="text-muted section-sublabel">Pull out specific information from a text</div>
+                  </button>
+              </div>
+          </div>
+          <div class="row py-1">
+              <div class="col">
+                  <button type="button" class="btn btn-section-advanced btn-lg w-100" id="analyze-sentiment-button">
+                      <div class="fw-bold section-label">Analyze Sentiment</div>
+                      <div class="text-muted section-sublabel">Determine if text expresses specific emotions</div>
+                  </button>
+              </div>
+          </div>
+          <div class="row py-1">
+              <div class="col">
+                  <button type="button" class="btn btn-section-advanced btn-lg w-100" id="retrieve-info-button">
+                      <div class="fw-bold section-label">Retrieve Information</div>
+                      <div class="text-muted section-sublabel">Populate information about anything (i.e. a state's capital)</div>
+                  </button>
+              </div>
+          </div>
+          <div class="row py-1">
+              <div class="col">
+                  <button type="button" class="btn btn-section-advanced btn-lg w-100" id="freeform-button">
+                      <div class="fw-bold section-label">Freeform</div>
+                      <div class="text-muted section-sublabel">Customize your response by typing anything you want</div>
+                  </button>
+              </div>
+          </div>
+          <div class="row py-1">
+              <div class="col">
+                  <button type="button" class="btn btn-section-advanced btn-lg w-100" id="infer-button">
+                      <div class="fw-bold section-label">Infer</div>
+                      <div class="text-muted section-sublabel">Provide examples of data to infer an output for select inputs</div>
+                  </button>
+              </div>
+          </div>
+        </fieldset>
+        
+        <!-- PASTE VALUES -->
+        <div class="row py-1">
+            <div class="col">
+                <button type="button" class="btn btn-home-paste btn-lg w-100" id="btnPasteValues">
+                  <div class="fw-bolder section-label">Paste results as static values</div>
+                  <div class="section-sublabel" style="color: #e1dbdb;">This prevents new results from populating in this worksheet when you refresh the page</div>
+                </button>
+            </div>
         </div>
-        <!--<div class="mt-3 text-red-500 text-center mb-4 ml-5 mr-5">-->
-        <!--<p>
-          If you are a subscriber and it shows "Inactive Subscription," click the icon in top right to log in to resolve issue.
-        </p>-->
-        <!--</div>-->
-    </div>
-    <div id="loadScr" class="bg-gray-300 fixed top-0 left-0 w-full h-full">
-        <div class="loadHolder mt-[12rem] ml-[5.5rem]">
-            <div class="loader"></div>
-        </div>
-    </div>
+      </div>
+    
+    </main>
 
     <script>
 

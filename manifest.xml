@@ -132,11 +132,11 @@
       </bt:Images>
       <bt:Urls>
         <bt:Url id="GetStarted.LearnMoreUrl" DefaultValue="https://go.microsoft.com/fwlink/?LinkId=276812" />
-        <bt:Url id="Commands.Url" DefaultValue="https://excelformulabot.github.io/excel-add-in/commands.html" />
-        <bt:Url id="Taskpane.Url" DefaultValue="https://excelformulabot.github.io/excel-add-in/taskpane.html" />
+        <bt:Url id="Commands.Url" DefaultValue="https://github.com/chrisyoungr/excel-add-in-main-chris/blob/master/commands.html" />
+        <bt:Url id="Taskpane.Url" DefaultValue="https://github.com/chrisyoungr/excel-add-in-main-chris/blob/master/taskpane.html" />
         <!-- Custom Functions -->
-        <bt:Url id="Funcjs" DefaultValue="https://aamirhusnain.github.io/ExcelFormulaBot/FunctionFile.js" />
-				<bt:Url id="Funchtml" DefaultValue="https://aamirhusnain.github.io/ExcelFormulaBot/FunctionFile.html" />
+        <bt:Url id="Funcjs" DefaultValue="https://github.com/chrisyoungr/excel-add-in-main-chris/blob/master/FunctionFile.js" />
+				<bt:Url id="Funchtml" DefaultValue="https://github.com/chrisyoungr/excel-add-in-main-chris/blob/master/FunctionFile.html" />
 				<bt:Url id="Funcmeta" DefaultValue="https://aamirhusnain.github.io/ExcelFormulaBot/functionmeta.json" />
       </bt:Urls>
 
